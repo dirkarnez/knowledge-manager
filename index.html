@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhatsApp Reply Example</title>
+  <style>
+    .message-container {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      position: relative;
+    }
+    .reply-container {
+      background-color: #f1f1f1;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      display: none;
+    }
+    .reply-container .message {
+      font-weight: bold;
+    }
+    .bottom-input {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #f1f1f1;
+      padding: 10px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+    }
+    .bottom-input input {
+      flex-grow: 1;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="messages-container">
+    <div class="message-container">
+      <h3>Message 1</h3>
+      <p>This is the first message.</p>
+      <button class="reply-btn">Reply</button>
+      <div class="reply-container">
+        <div class="message">Replying to Message 1</div>
+      </div>
+    </div>
+    <div class="message-container">
+      <h3>Message 2</h3>
+      <p>This is the second message.</p>
+      <button class="reply-btn">Reply</button>
+      <div class="reply-container">
+        <div class="message">Replying to Message 2</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-input">
+    <input type="text" placeholder="Type your reply..." id="reply-input">
+    <button id="send-btn">Send</button>
+  </div>
+
+  <script>
+    const replyBtns = document.querySelectorAll('.reply-btn');
+    const replySections = document.querySelectorAll('.reply-container');
+    const replyInput = document.getElementById('reply-input');
+    const sendBtn = document.getElementById('send-btn');
+
+    replyBtns.forEach((btn, index) => {
+      btn.addEventListener('click', () => {
+        replySections[index].style.display = 'block';
+        replyInput.value = `Replying to Message ${index + 1}`;
+      });
+    });
+
+    sendBtn.addEventListener('click', () => {
+      const replyText = replyInput.value.trim();
+      if (replyText) {
+        // Here you can add the logic to send the reply
+        console.log('Sending reply:', replyText);
+        replyInput.value = '';
+        replySections.forEach(section => {
+          section.style.display = 'none';
+        });
+      }
+    });
+  </script>
+</body>
+</html>
